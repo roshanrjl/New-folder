@@ -18,19 +18,27 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router()
 
-router.route("/register").post(
-    upload.fields([
-        {
-            name: "avatar",
-            maxCount: 1
-        }, 
-        {
-            name: "coverImage",
-            maxCount: 1
-        }
-    ]),
-    registerUser
-    )
+
+
+router.post(
+  '/register',
+  (req, res, next) => {
+    console.log("Reached route before multer");
+     console.log('checking files:', req.files);
+    next();
+  },
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "coverImage", maxCount: 1 }
+
+  ]),
+  (req, res) => {
+    console.log('checking files:', req.files);
+    res.send('Files processed');
+  }
+);
+
+
 
 router.route("/login").post(loginUser)
 
