@@ -16,7 +16,6 @@ app.use(
 
 
 app.use(morgan("combined"));
-app.use("/api/v1/users", userRoute);
 //middlewaire start vayo and middlewaire garauda .use garne
 //frontend bataaayako json data lai linw ko lagi ra limit is a option i.e 16kb samma data json format ma linw milxa yo aafi set garne ho {yo middlewaire ho}
 app.use(express.json({ limit: "16kb" }));
@@ -32,6 +31,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 //router import
+app.use("/api/v1/users", userRoute);
 
 //route declaration
 app.get("/", (req, res) => {
