@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import connectDb from "./db/connect.js";
-import { app } from "./app.js";
+import app  from "./app.js";
 import { validateEnv } from "./utils/validateEnv.js";
 import { COLORS } from "./constants.js";
 
