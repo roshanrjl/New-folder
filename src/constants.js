@@ -5,3 +5,5 @@ export const COLORS = {
   yellow: "\x1b[33m",
   blue: "\x1b[34m",
 };
+
+export const DB_NAME = "youtube";
