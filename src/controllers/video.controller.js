@@ -1,6 +1,4 @@
-import mongoose, { isValidObjectId } from "mongoose";
 import { Video } from "../models/video.model.js";
-import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -14,7 +12,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
   limit = parseInt(limit) || 10;
 
   const skip = (page - 1) * limit;
-  const sortDireciton = sortType === "desc" ? -1 : 1;
+  const _sortDireciton = sortType === "desc" ? -1 : 1;
 
   const result = await Video.aggregate([
     {
@@ -207,15 +205,16 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
   video.isPublished = !video.isPublished;
   await video.save();
 
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      video,
-      `Video is now ${video.isPublished ? "published" : "unpublished"}`
-    )
-  );
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        video,
+        `Video is now ${video.isPublished ? "published" : "unpublished"}`
+      )
+    );
 });
-
 
 export {
   getAllVideos,

@@ -16,7 +16,7 @@ const generateAccessAndRefereshTokens = async (userId) => {
     await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
-  } catch (error) {
+  } catch (_error) {
     throw new ApiError(
       500,
       "Something went wrong while generating referesh and access token"
@@ -378,6 +378,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         isSubscribed: {
           $cond: {
             if: { $in: [req.user?._id, "$subscribers.subscriber"] },
+            // biome-ignore lint/suspicious/noThenProperty: `then` is a valid MongoDB aggregation operator field
             then: true,
             else: false,
           },

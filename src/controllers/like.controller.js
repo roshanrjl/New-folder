@@ -1,4 +1,3 @@
-import mongoose, { isValidObjectId } from "mongoose";
 import { Like } from "../models/like.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -6,7 +5,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Video } from "../models/video.models.js";
 import { Comment } from "../models/comment.models.js";
 import { Tweet } from "../models/tweet.models.js";
-import e from "express";
 
 //contrller for toggleing the video like
 //i.e if video is like then do unlike the video and if the video is unlike the like the video
@@ -99,7 +97,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 
     return res.status(200).json(200, {}, "tweet is unlike successfully");
   } else {
-    const newlikeTweet = Like.create({
+    const _newlikeTweet = Like.create({
       tweet: tweetId,
       likedBy: user,
     });

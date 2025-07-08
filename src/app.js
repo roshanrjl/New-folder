@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use("/api/v1/users", userRoute);
 
 //route declaration
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("Hello, Morgan!");
 });
 

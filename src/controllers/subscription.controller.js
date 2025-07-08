@@ -1,10 +1,8 @@
-import mongoose, { isValidObjectId } from "mongoose";
 // import { User } from "../models/user.model.js";
 import { Subscription } from "../models/subscription.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-
 
 const toggleSubscription = asyncHandler(async (req, res) => {
   // TODO: toggle subscription
@@ -75,7 +73,6 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, subscriberList, "List of subscribers fetched"));
 });
 
-
 // controller to return channel list to which user has subscribed
 const getSubscribedChannels = asyncHandler(async (req, res) => {
   const { subscriberId } = req.params;
@@ -116,9 +113,4 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, channelList, "Subscribed channels fetched"));
 });
 
-
-export { 
-     toggleSubscription,
-     getUserChannelSubscribers, 
-     getSubscribedChannels
-     };
+export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels };

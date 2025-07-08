@@ -1,4 +1,3 @@
-
 import { ApiError } from "./ApiError.js";
 
 const requiredEnvVars = [

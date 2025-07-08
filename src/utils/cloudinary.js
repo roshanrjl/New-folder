@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
+import fs from "node:fs";
 
 // Configuration
 cloudinary.config({
@@ -13,10 +13,11 @@ const uploadOnCloudinary = async (localfilepath) => {
     .upload(localfilepath, {
       resource_type: "auto",
     })
-    .catch((error) => {
+    .catch((_error) => {
       fs.unlinkSync(localfilepath); //remove the temporary uploaded file as the operation got failed
       return null;
     });
+  return response; // Actually return the response
 };
 
 export { uploadOnCloudinary };
