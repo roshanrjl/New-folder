@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRoute from "./routes/user.routes.js";
+import cors from "cors";
+import express from "express";
 import morgan from "morgan";
+import userRoute from "./routes/user.routes.js";
 // import morgan from "morgan"
 
 const app = express();
@@ -13,7 +13,6 @@ app.use(
     credentials: true,
   })
 );
-
 
 app.use(morgan("combined"));
 //middlewaire start vayo and middlewaire garauda .use garne
@@ -37,6 +36,5 @@ app.use("/api/v1/users", userRoute);
 app.get("/", (req, res) => {
   res.send("Hello, Morgan!");
 });
-
 
 export default app;
