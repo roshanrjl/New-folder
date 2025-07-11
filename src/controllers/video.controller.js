@@ -64,6 +64,16 @@ const publishAVideo = asyncHandler(async (req, res) => {
       .status(400)
       .json({ success: false, message: "No video file uploaded" });
   }
+  const thumbnailpath = req.file.thumbnail?.[0].path;
+
+  if(!thumbnailpath){
+    throw new ApiError(400, "couldnot found the thumbnail")
+  }
+  const thumbnailresult = await uploadOnCloudinary(thumbnailpath)
+  
+  if(!thumbnailresult){
+    throw new ApiError(500, "something went wrong while uploading to the cloudinary")
+  }
   const videopath = req.files.video?.[0].path;
 
   if (!videopath) {
@@ -76,6 +86,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
   }
   const myvideo = await Video.create({
     videoFile: coudinaryresult.url,
+    thumbnail:thumbnailresult.url,
     title: title,
     description: description,
     user: req.user._id,
